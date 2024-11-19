@@ -433,7 +433,7 @@ __attribute__((noreturn)) static void *filterThread(void *arg) {
             // work on our record
             switch (record_ptr->type) {
                 case CommonRecordType:
-                    printf("Need to convert record type: %u\n", CommonRecordType);
+                    LogInfo("Need to convert record type: %u", CommonRecordType);
                     sumSize = 0;
                     break;
                 case V3Record: {
@@ -606,7 +606,7 @@ static stat_record_t process_data(void *engine, int processMode, char *wfile, Re
 
                 } break;
                 case ExtensionMapType:
-                    printf("ExtensionMap no longer handled here!\n");
+                    LogError("ExtensionMap no longer handled here!");
                     break;
                 case ExporterInfoRecordType: {
                     int ret = AddExporterInfo((exporter_info_record_t *)record_ptr);
@@ -1252,7 +1252,7 @@ int main(int argc, char **argv) {
     nfprof_end(&profile_data, totalRecords);
 
     if (totalPassed == 0) {
-        printf("No matching flows\n");
+        LogInfo("No matching flows");
     }
 
     if (aggregate || print_order) {
